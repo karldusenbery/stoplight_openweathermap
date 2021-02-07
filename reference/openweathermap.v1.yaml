@@ -168,24 +168,24 @@ paths:
                 properties:
                   coord:
                     type: object
-                    properties:
-                      lon:
-                        type: number
-                      lat:
-                        type: number
                     required:
                       - lon
                       - lat
+                    properties:
+                      lon:
+                        type: number
+                        description: 'City geo location, longitude'
+                        example: 145.77
+                      lat:
+                        type: number
+                        description: 'City geo location, latitude'
+                        example: -16.92
                   weather:
                     type: array
                     uniqueItems: true
                     minItems: 1
                     items:
-                      required:
-                        - id
-                        - main
-                        - description
-                        - icon
+                      type: object
                       properties:
                         id:
                           type: number
@@ -198,11 +198,23 @@ paths:
                         icon:
                           type: string
                           minLength: 1
+                      required:
+                        - id
+                        - main
+                        - description
+                        - icon
                   base:
                     type: string
                     minLength: 1
                   main:
                     type: object
+                    required:
+                      - temp
+                      - feels_like
+                      - temp_min
+                      - temp_max
+                      - pressure
+                      - humidity
                     properties:
                       temp:
                         type: number
@@ -216,36 +228,35 @@ paths:
                         type: number
                       humidity:
                         type: number
-                    required:
-                      - temp
-                      - feels_like
-                      - temp_min
-                      - temp_max
-                      - pressure
-                      - humidity
                   visibility:
                     type: number
                   wind:
                     type: object
+                    required:
+                      - speed
+                      - deg
                     properties:
                       speed:
                         type: number
                       deg:
                         type: number
-                    required:
-                      - speed
-                      - deg
                   clouds:
                     type: object
+                    required:
+                      - all
                     properties:
                       all:
                         type: number
-                    required:
-                      - all
                   dt:
                     type: number
                   sys:
                     type: object
+                    required:
+                      - type
+                      - id
+                      - country
+                      - sunrise
+                      - sunset
                     properties:
                       type:
                         type: number
@@ -258,12 +269,6 @@ paths:
                         type: number
                       sunset:
                         type: number
-                    required:
-                      - type
-                      - id
-                      - country
-                      - sunrise
-                      - sunset
                   timezone:
                     type: number
                   id:
@@ -291,8 +296,8 @@ paths:
                 Example:
                   value:
                     coord:
-                      lon: 0
-                      lat: 0
+                      lon: 145.77
+                      lat: -16.92
                     weather:
                       - id: 0
                         main: string
